@@ -1,0 +1,76 @@
+/* Hide the original checkbox */
+input[type="checkbox"] {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    opacity: 0;  /* Hide the checkbox */
+    clip: rect(0, 0, 0, 0);  /* Clip the checkbox, making it invisible */
+    pointer-events: none; /* Prevent the hidden checkbox from capturing clicks */
+}
+
+/* Custom checkbox wrapper */
+.custom-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    user-select: none; /* Disable text selection */
+}
+
+/* Space between checkbox and label text */
+.custom-checkbox-wrapper label {
+    display: flex;
+    align-items: center;
+    padding-left: 25px; /* Space between checkbox and label */
+}
+
+/* Custom checkbox (before pseudo-element) */
+.custom-checkbox-wrapper label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid #007bff; /* Border color */
+    border-radius: 4px;
+    background-color: white;  /* White background */
+    transition: all 0.3s ease; /* Smooth transition for checked state */
+}
+
+/* When checkbox is checked, change background and border */
+.custom-checkbox-wrapper.checked label::before {
+    background-color: #007bff; /* Background color when checked */
+    border-color: #0056b3;     /* Border color when checked */
+}
+
+/* Checkmark (using ::after) */
+.custom-checkbox-wrapper.checked label::after {
+    content: '✔';  /* Unicode checkmark */
+    position: absolute;
+    left: 4px;         /* Position checkmark inside checkbox */
+    top: 50%;
+    transform: translateY(-50%); /* Center checkmark vertically */
+    font-size: 14px;   /* Size of the checkmark */
+    color: white;      /* Color of the checkmark */
+}
+
+/* Hover effect on checkbox */
+.custom-checkbox-wrapper label:hover::before {
+    border-color: #0056b3; /* Change border color on hover */
+}
+
+/* Focus effect on checkbox (focus indicator) */
+input[type="checkbox"]:focus + label::before,
+.custom-checkbox-wrapper label:focus-within::before {
+    border-color: #ff8c00; /* Orange border color when focused */
+    box-shadow: 0 0 5px rgba(255, 140, 0, 0.6); /* Optional: shadow around checkbox for focus */
+}
+
+/* Change the cursor to pointer to show it's clickable */
+input[type="checkbox"]:not(:disabled):hover {
+    cursor: pointer;
+}

@@ -1,0 +1,19 @@
+<div *ngIf="loading">Loading...</div>
+
+<div *ngIf="!loading">
+  <h3>Select Options</h3>
+  <form>
+    <div *ngFor="let item of checkboxData">
+      <div class="custom-checkbox-wrapper" [class.checked]="item.checked">
+        <input 
+          type="checkbox" 
+          [(ngModel)]="item.checked" 
+          [id]="'checkbox-' + item.id" 
+          name="checkbox-{{ item.id }}" 
+        />
+        <label [for]="'checkbox-' + item.id">{{ item.title }}</label>
+      </div>
+    </div>
+  </form>
+</div>
+

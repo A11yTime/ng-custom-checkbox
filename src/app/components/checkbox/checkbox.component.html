@@ -1,0 +1,25 @@
+<div *ngIf="loading">Loading...</div>  <!-- Display loading state -->
+
+<div *ngIf="!loading">
+  <h3>Select Options</h3>
+  <form>
+    <div *ngFor="let item of checkboxData">
+      <label>
+        <input 
+          type="checkbox" 
+          [(ngModel)]="item.checked"  
+          name="checkbox-{{ item.id }}"  
+          [attr.aria-checked]="item.checked ? 'true' : 'false'"  
+        />
+        {{ item.label }}
+      </label>
+
+      <!-- Show a message based on whether the checkbox is checked -->
+      <div *ngIf="item.checked">This option is checked</div>
+      <div *ngIf="!item.checked">This option is unchecked</div>
+
+      <!-- Debugging output: Show the actual state of the checkbox -->
+      <div>{{ item.checked }}</div>
+    </div>
+  </form>
+</div>
